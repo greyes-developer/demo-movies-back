@@ -12,7 +12,7 @@ const createMovie = async (req, res = response) => {
       return res.status(400).json({
         success: false,
         data: {
-          mgs: "Doesnt exist movie with this ID",
+          mgs: "Does exist movie with this ID",
         },
       });
     }
@@ -24,7 +24,7 @@ const createMovie = async (req, res = response) => {
     return res.json({
       success: true,
       data: {
-        id: movie.imdbID,
+        imdbID: movie.imdbID,
       },
     });
   } catch (error) {
@@ -99,8 +99,31 @@ const getMovies = async (req, res = response) => {
   }
 };
 
+const deleteMovies = async (req, res = response) => {
+  const uid = Number.parseInt(req.params.uid);
+
+  try {
+    const moviesDeleted = await Movie.deleteMany({ uid });
+
+    return res.json({
+      success: true,
+      data: {
+        msg: "Delete  movies success",
+      },
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      data: {
+        msg: "Delete movies failed",
+      },
+    });
+  }
+};
+
 module.exports = {
   createMovie,
   deleteMovie,
   getMovies,
+  deleteMovies,
 };
