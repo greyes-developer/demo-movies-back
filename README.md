@@ -16,4 +16,4 @@ $ npm start
 
 ### NOTES
 
-The .env files must be in the root of the project
+The .env files must be in the root of the project.
